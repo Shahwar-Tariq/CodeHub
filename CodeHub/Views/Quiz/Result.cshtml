@@ -1,0 +1,31 @@
+﻿@model CodeHub.ViewModels.QuestionResultViewModel
+@{ 
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+@if (TempData["message"] != null)
+{
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+        @Html.Raw(@TempData["message"])
+    </div>
+}
+<div style="align-content:center;padding:20px;margin-left:40%">
+    <h2 style="font-weight:300;margin-left:60px;">Result</h2>
+    <table style="border:double;color:white">
+        <tr>
+            <td style="padding:30px;background-color:#28bd4f;font-weight:bolder">  Correct:  @Model.correct </td>
+            <td style="padding:30px;background-color:#d43a2f;font-weight:bolder"> Wrong: @Model.wrong</td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    @foreach (var data in Model.results)
+        {
+    <div style="padding:5px; width:250px;margin-bottom:1px"> <strong> <span style="font-size:20px"> Question: </span> <span> @data.question_name </span> </strong> <br /> </div> 
+    <div style="background-color:#e3dfde;padding:5px; width:250px;margin-bottom:1px"> <strong> <span style="font-size:20px"> Selected:  </span> <span> @data.selected_option </span></strong> <br /> </div>
+    <div style="background-color:#e3dfde;padding:5px; width:250px;margin-bottom:1px"> <strong> <span style="font-size:20px">  Correct:  </span> <span> @data.correct_option </span> </strong><br /> </div>
+
+            } 
+
+        </div>

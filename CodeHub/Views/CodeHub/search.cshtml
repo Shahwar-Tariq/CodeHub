@@ -1,0 +1,145 @@
+﻿
+@model CodeHub.ViewModel.CourseCartIndexViewModel
+@{
+    ViewBag.Title = "search";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<div class="sc_section accent_top bg_tint_light sc_bg1" data-animation="animated fadeInUp normal">
+    <div class="sc_section_overlay">
+        <div class="sc_section_content">
+            <div class="sc_content content_wrap margin_top_2_5em_imp margin_bottom_2_5em_imp">
+                <center>     <h2 style="font-weight:400">..Courses..</h2> </center>
+                <div class="sc_blogger layout_courses_3 template_portfolio sc_blogger_horizontal no_description">
+                    <div class="isotope_wrap" data-columns="3">
+                        <!-- Courses item html-->
+                        @foreach (var data in @Model.corse)
+                        {
+
+                            <div class="isotope_item isotope_item_courses isotope_column_3 flt_57">
+                                <article class="post_item post_item_courses odd">
+                                    <div class="post_content isotope_item_content ih-item colored square effect_dir left_to_right">
+                                        <div class="post_featured img">
+
+                                            <a href="/Courses/GetCourse?course_code=@data.course_code">
+                                                <img alt="" src="~/Images/Course_Images/@data.image" style="height:350px; width:400px">
+                                            </a>
+                                            <h4 class="post_title">
+                                                <a href="/Courses/GetCourse?course_code=@data.course_code">@data.course_name</a>
+                                            </h4>
+
+                                            <div class="post_descr">
+                                                <div class="post_price">
+                                                    <span class="post_price_value">@data.type</span>
+                                                </div>
+
+                                                <div class="post_rating reviews_summary blog_reviews">
+                                                    <div class="criteria_summary criteria_row">
+                                                        <span style="font-weight:500">Offered By Code Hub</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="post_info_wrap info">
+
+                                            <div class="info-back">
+                                                <h4 class="post_title">
+                                                    <a href="/Courses/GetCourse?course_code=@data.course_code">@data.course_name</a>
+                                                </h4>
+                                                <div class="post_descr">
+                                                    <p>
+                                                        <a href="/Courses/GetCourse?course_code=@data.course_code">@Html.Raw(@data.summary)</a>
+                                                    </p>
+                                                    <div class="post_buttons">
+                                                        <div class="post_button">
+                                                            <a href="/Courses/GetCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">LEARN MORE</a>
+                                                        </div>
+                                                        @if (@data.type == "Paid")
+                                                        {
+                                                            if (Session["id"] != null)
+                                                            {
+
+                                                                if (Model.cartitem.Count() != 0)
+                                                                {
+
+                                                                    if (Model.cartitem.FirstOrDefault(x => x.course_code == data.course_code) != null)
+                                                                    {
+                                                                        <div class="post_button">
+                                                                            <a href="/CodeHub/ViewCart" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">In Cart</a>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="post_button">
+                                                                            <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                        </div>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    if (Model.ord.Count() == 0)
+                                                                    {
+                                                                        <div class="post_button">
+                                                                            <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Model.orddet.FirstOrDefault(x => x.course_code == @data.course_code) != null)
+                                                                        {
+                                                                            var id = Session["id"].ToString();
+                                                                            var userid = Model.ord.FirstOrDefault().user_id.ToString();
+                                                                            var ordr_detl = Model.ord.FirstOrDefault().order_details.FirstOrDefault().course_code;
+                                                                            var orderid = Model.orddet.FirstOrDefault(x => x.course_code == data.course_code).order_id;
+                                                                            if (Model.ord.FirstOrDefault(x => x.id == orderid).status == "COMPLETED")
+                                                                            {
+                                                                                <div>
+
+                                                                                </div>
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="post_button">
+                                                                                <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+
+                                                                }
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="post_button">
+                                                                    <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                </div>
+                                                            }
+
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        }
+
+                        <!-- /Courses item -->
+
+
+
+                    </div>
+                </div>
+                <a href="/Courses/Index" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_menu sc_button_size_small aligncenter sc_button_iconed icon-graduation margin_top_1em margin_bottom_4 widht_12em">VIEW ALL COURSES</a>
+            </div>
+        </div>
+    </div>
+</div>

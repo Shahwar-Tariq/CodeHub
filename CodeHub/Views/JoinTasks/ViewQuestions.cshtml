@@ -1,0 +1,156 @@
+﻿@model IEnumerable<CodeHub.Models.question>
+@{
+     ViewBag.Title = "ViewQuestions";
+
+     if (Session["role"].ToString() == "Expert")
+     {
+         Layout = "~/Views/Shared/_ExpertLayout.cshtml";
+     }
+     else
+     {
+         Layout = "~/Views/Shared/_Layout.cshtml";
+
+     }
+}
+<div class="toolbar">
+    <!--begin::Toolbar-->
+    <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-5">
+            <!--begin::Title-->
+            <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Quiz</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Quizzes</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">View questions</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+        <!--begin::Action group-->
+   
+        <!--end::Action group-->
+    </div>
+    <!--end::Toolbar-->
+</div>
+@if (TempData["message"] != null)
+{
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto">
+        @Html.Raw(@TempData["message"])
+    </div>
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content" style="margin-top:25px">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-fluid">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                        <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search Quiz" />
+                    </div>
+                    <!--end::Search-->
+                </div>
+                <!--begin::Card title-->
+                <!--begin::Card toolbar-->
+        
+                <!--end::Card toolbar-->
+            </div>
+
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body py-4">
+                <!--begin::Table-->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    <!--begin::Table head-->
+                    <thead>
+                        <!--begin::Table row-->
+                        <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                            <th class="min-w-125px">Course Name</th>
+                            <th class="min-w-125px">Topic Name</th>
+                            <th class="min-w-125px">Quiz Name</th>
+                            <th class="min-w-125px">Question</th>
+                            <th class="min-w-125px">options</th>
+                            <th class="min-w-125px">Answer</th>
+                            <th class="text-end min-w-100px">Actions</th>
+                        </tr>
+                        <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody class="text-gray-600 fw-bold">
+                        @foreach (var data in Model)
+                        {
+
+                        <!--begin::Table row-->
+                            <tr>
+                                <!--begin::Checkbox-->
+                               
+                                <td>@data.quiz.course.course_name</td>
+                                <td>@data.quiz.topic.topic_name</td>
+                                <td>@data.quiz.quiz_name</td>
+                                <td>@data.question_name</td>
+                                <td>@data.option1, @data.option2, @data.option3, @data.option4</td>
+                                <td>@data.answer</td>
+                                <!--begin::Action=-->
+                                <td class="text-end"style="width:180px">
+                                   <div>
+                                            <a href="/JoinTasks/DeleteQuestion?id=@data.id" class="btn btn-danger" >Delete</a>
+                                      
+                                    </div>
+                                    <!--end::Menu-->
+                                </td>
+                                <!--end::Action=-->
+                            </tr>
+                        <!--end::Table row-->
+                        <!--begin::Table row-->
+
+                        }
+                    </tbody>
+                    <!--end::Table body-->
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Container-->
+</div>
+
+
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~/assets/js/scripts.bundle.js"></script>
+
+<script src="~/assets/js/custom/apps/user-management/users/list/table.js"></script>

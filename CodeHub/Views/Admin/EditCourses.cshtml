@@ -1,0 +1,195 @@
+﻿@model CodeHub.Models.course
+
+@{
+    ViewBag.Title = "EditCourses";
+}
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <title>Code Hub-Edit Courses</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Good admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
+    <meta name="keywords" content="Good, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, bootstrap dark mode" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Good - Bootstrap 5 HTML Admin Dashboard Template" />
+    <meta property="og:url" content="https://themes.getbootstrap.com/product/good-bootstrap-5-admin-dashboard-template" />
+    <meta property="og:site_name" content="Keenthemes | Good" />
+    <link rel="canonical" href="https://preview.keenthemes.com/good" />
+    <link rel="shortcut icon" href="../../assets/media/logos/favicon.ico" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <!--Begin::Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
+    <!--End::Google Tag Manager -->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="auth-bg">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Authentication - Sign-up -->
+        <div class="toolbar">
+            <!--begin::Toolbar-->
+            <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column me-5">
+                    <!--begin::Title-->
+                    <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Course</h1>
+                    <!--end::Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">Courses</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-dark">Edit Course</li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+                <!--begin::Action group-->
+          
+                <!--end::Action group-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <!--begin::Aside-->
+            <!--begin::Aside-->
+            <!--begin::Body-->
+            <div class="d-flex flex-column flex-lg-row-fluid py-10">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid" style="margin-top:15px">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-600px p-10 p-lg-15 mx-auto">
+                        <!--begin::Form-->
+                        <form action="/Admin/EditCourse" method="post" class="form w-100" novalidate="novalidate" enctype="multipart/form-data">
+                            <!--begin::Heading-->
+                            <div class="mb-10 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-dark mb-3">Edit a Course</h1>
+                                <!--end::Title-->
+                                <!--begin::Link-->
+                                <!--end::Link-->
+                            </div>
+                            @if (TempData["message"] != null)
+                            {
+
+                                @Html.Raw(@TempData["message"])
+
+                            }
+                            <!--end::Heading-->
+                            <!--begin::Action-->
+                            <!--end::Action-->
+                            <!--begin::Separator-->
+                            <!--end::Separator-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <!--begin::Col-->
+                                <div class="col-xl-6">
+                                    <label class="required fw-bolder text-dark fs-6">Course Code</label>
+                                    <input type="text" disabled value="@Model.course_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Course Code" />
+                                    <input type="hidden" name="course_code" value="@Model.course_code" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Course Code" />
+
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-6">
+                                    <label class="required fw-bolder text-dark fs-6">Course Name</label>
+                                    <input type="text" name="course_name" value="@Model.course_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Course Name" />
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <label class="required form-label fw-bolder text-dark fs-6">Course Summary</label>
+                                    <textarea type="text" rows="10" cols="50" maxlength="400" name="summary" class="form-control form-control-solid mb-3 mb-lg-0"  required>@Model.summary</textarea>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <label class="required fw-bolder text-dark fs-6">Course Type</label>
+                                <select name="type"  data-control="select2" data-placeholder="Select a Type" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                   
+                                     <option> @Model.type</option>
+                                    <option>Paid</option>
+                                    <option>Free</option>
+                                </select>
+                            </div>
+                            <div class="fv-row mb-7">
+                                <label class="required fw-bolder text-dark fs-6">Price</label>
+                                <input type="text" id="price" value="@Model.price" name="price" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Course price" />
+                            </div>
+                            <div class="fv-row mb-7">
+                                <label class="required form-label fw-bolder text-dark fs-6">Upload Image</label>
+                                <input type="file" id="C_image" name="C_image" accept=".png, .jpg, .jpeg" value="@Model.image"class="form-control form-control-solid mb-3 mb-lg-0" />
+                            </div>
+                            <div class="text-center">
+                                <!--begin::Submit button-->
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                                    <span class="indicator-label">Edit Course</span>
+                                    <span class="indicator-progress">
+                                        Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <!--end::Submit button-->
+
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <!--end::Footer-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Authentication - Sign-up-->
+    </div>
+    <!--end::Main-->
+    <script>var hostUrl = "/good/assets/";</script>
+    <!--begin::Javascript-->
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src="/assets/js/custom/authentication/sign-up/general.js"></script>
+    <!--end::Page Custom Javascript-->
+    <!--end::Javascript-->
+    <!--Begin::Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!--End::Google Tag Manager (noscript) -->
+</body>
+<!--end::Body-->
+</html>
+

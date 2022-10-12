@@ -1,0 +1,186 @@
+﻿@model CodeHub.ViewModel.CourseCartIndexViewModel
+
+@{
+    ViewBag.Title = "CoursesIndex";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<!-- Page title -->
+<div class="page_top_wrap page_top_title page_top_breadcrumbs sc_pt_st1">
+    <div class="content_wrap">
+        <div class="breadcrumbs">
+            <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+            <span class="breadcrumbs_delimiter"></span>
+            <span class="breadcrumbs_item current">All courses</span>
+        </div>
+        <h2 class="page_title" style="font-weight:300">All courses</h2>
+    </div>
+</div>
+
+@if (TempData["message"] != null)
+{
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+        @Html.Raw(@TempData["message"])
+    </div>
+}
+        <!-- /Page title -->
+        <!-- Content with sidebar -->
+        <div class="page_content_wrap" style="padding-top:4%">
+            <div class="content_wrap">
+                <div class="content">
+                    
+
+                    @* <div class="isotope_filters isotope-courses-streampage"></div>*@
+                    <div class="isotope_wrap" data-columns="3">
+                        <!-- Courses item html-->
+                       @foreach (var data in @Model.corse)
+                       {
+
+                            <div class="isotope_item isotope_item_courses isotope_column_3 flt_57">
+                                <article class="post_item post_item_courses odd">
+                                    <div class="post_content isotope_item_content ih-item colored square effect_dir left_to_right">
+                                        <div class="post_featured img">
+                                          
+                                            <a href="/Courses/GetCourse?course_code=@data.course_code">
+                                                <img alt="" src="~/Images/Course_Images/@data.image" style="height:350px; width:400px">
+                                            </a>
+                                            <h4 class="post_title">
+                                                <a href="/Courses/GetCourse?course_code=@data.course_code">@data.course_name</a>
+                                            </h4>
+                                            
+                                            <div class="post_descr">
+                                                <div class="post_price">
+                                                    <span class="post_price_value">@data.type</span>
+                                                </div>
+
+                                                <div class="post_rating reviews_summary blog_reviews">
+                                                    <div class="criteria_summary criteria_row">
+                                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="post_info_wrap info">
+                                          
+                                                    <div class="info-back">
+                                                        <h4 class="post_title">
+                                                            <a href="/Courses/GetCourse?course_code=@data.course_code">@data.course_name</a>
+                                                        </h4>
+                                                        <div class="post_descr">
+                                                            <p>
+                                                                <a href="/Courses/GetCourse?course_code=@data.course_code">@Html.Raw(@data.summary)</a>
+                                                            </p>
+                                                            <div class="post_buttons">
+                                                                <div class="post_button">
+                                                                    <a href="/Courses/GetCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">LEARN MORE</a>
+                                                                </div>
+                                                                @if (@data.type == "Paid")
+                                                                {
+                                                                    if (Session["id"] != null)
+                                                                    {
+
+                                                                        if (Model.cartitem.Count() != 0)
+                                                                        {
+
+                                                                           if(Model.cartitem.FirstOrDefault(x=> x.course_code == data.course_code) != null)
+                                                                            {
+                                                                                    <div class="post_button">
+                                                                                        <a href="/CodeHub/ViewCart" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">In Cart</a>
+                                                                                    </div>
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <div class="post_button">
+                                                                                    <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                                </div>
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                                                       
+                                                                            if (Model.ord.Count() == 0)
+                                                                            {
+                                                                                <div class="post_button">
+                                                                                    <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                                </div>
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (Model.orddet.FirstOrDefault(x => x.course_code == @data.course_code) != null)
+                                                                                {
+                                                                                    var id = Session["id"].ToString();
+                                                                                    var userid = Model.ord.FirstOrDefault().user_id.ToString();
+                                                                                    var ordr_detl = Model.ord.FirstOrDefault().order_details.FirstOrDefault().course_code;
+                                                                                    var orderid = Model.orddet.FirstOrDefault(x => x.course_code == data.course_code).order_id;
+                                                                                    if (Model.ord.FirstOrDefault(x=>x.id == orderid).status == "COMPLETED")
+                                                                                    {
+                                                                                        <div>
+
+                                                                                        </div>
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <div class="post_button">
+                                                                                        <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                                    </div>
+                                                                                }
+
+                                                                            }
+
+                                                                        }
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                         <div class="post_button">
+                                                                             <a href="/CodeHub/BuyCourse?course_code=@data.course_code" class="sc_button sc_button_square sc_button_style_filled sc_button_bg_link sc_button_size_small">BUY NOW</a>
+                                                                          </div>
+                                                                     }
+
+
+                                                              }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            
+
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                                                }
+                        
+                        <!-- /Courses item -->
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /Content -->
+        <!-- Partners footer -->
+        <!-- /Partners footer -->
+        <!-- Widgets Footer -->
+        <footer class="footer_wrap bg_tint_light footer_style_light widget_area">
+            <div class="content_wrap">
+                <div class="columns_wrap">
+                    <!-- Calendar widget -->
+                    <!-- /Calendar widget -->
+                    <!-- Popular courses widget -->
+                    <!-- /Popular courses widget -->
+                    <!-- Recent courses widget -->
+                    <!-- /Recent courses widget -->
+                </div>
+            </div>
+        </footer>
+        <!-- /Widgets Footer -->
+        <!-- Contacts Footer  -->
+        <!-- /Contacts Footer -->
+        <!-- Copyright -->
+        <!-- /Copyright -->

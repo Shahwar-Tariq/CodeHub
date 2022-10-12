@@ -1,0 +1,145 @@
+﻿@model CodeHub.ViewModel.UserCourseViewModel
+@{
+    ViewBag.Title = "AssignCourse";
+}
+
+<body id="kt_body" class="auth-bg">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Authentication - Sign-up -->
+        <div class="toolbar">
+            <!--begin::Toolbar-->
+            <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column me-5">
+                    <!--begin::Title-->
+                    <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Assign Course </h1>
+                    <!--end::Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted"> Courses</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-dark">Assign Course</li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+                <!--begin::Action group-->
+         
+                <!--end::Action group-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <!--begin::Aside-->
+            <!--begin::Aside-->
+            <!--begin::Body-->
+
+            <div class="d-flex flex-column flex-lg-row-fluid py-10">
+
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid" style="margin-top:50px">
+                    <!--begin::Wrapper-->
+                    <div>
+                        <!--begin::Form-->
+                        <form action="/Admin/AssignCourse" class="form w-100" novalidate="novalidate" id="kt_sign_up_form" enctype="multipart/form-data" method="post">
+                            <!--begin::Heading-->
+                            <div class="mb-10 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-dark mb-3">Assign Course</h1>
+                                <!--end::Title-->
+                                <!--begin::Link-->
+                                <!--end::Link-->
+                            </div>
+                            @if (TempData["message"] != null)
+                            {
+
+                                @Html.Raw(@TempData["message"])
+
+                            }
+                            <div class="row fv-row mb-7">
+                                <!--begin::Col-->
+                                <!--end::Col-->
+                                <!--begin::Col-->
+
+                                <div class="col-xl-6">
+                                    <label class="required fw-bolder text-dark fs-6">Course Name</label>
+                                    <select  name="course_code" data-control="select2" data-placeholder="Select a Course" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                        <option></option>
+                                        @foreach (var c in Model.crs)
+                                        {
+                                            <option value="@c.course_code">@c.course_name</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-6" style="align-content:center">
+                                    <label class="required fw-bolder text-dark fs-6">Assign To</label>
+                                    <select  name="user_id" data-control="select2" data-placeholder="Select a Topic" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                       
+                                        
+                                        @foreach (var c in @Model.usr)
+                                        {
+                                                   <option value="@c.user_id">@c.first_name @c.last_name (@c.skills)</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <!--end::Col-->
+                            </div>
+                            
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+
+                            <div class="text-center">
+                                <!--begin::Submit button-->
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary">
+                                    <span class="indicator-label">Assign</span>
+                                    <span class="indicator-progress">
+                                        Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <!--end::Submit button-->
+
+                            </div>
+
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <!--end::Footer-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Authentication - Sign-up-->
+    </div>
+    <script src="~/assets/js/jquery/jquery-1.11.3.js"></script>
+ 
+    <!--end::Main-->
+    
+
+</body>
+

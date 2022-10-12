@@ -1,0 +1,204 @@
+﻿@model IEnumerable<CodeHub.Models.cart_item>
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+<body class="page body_style_wide body_filled article_style_boxed layout_single-standard top_panel_style_light top_panel_opacity_solid top_panel_above menu_right sidebar_hide woocommerce-checkout woocommerce-page">
+    <a id="toc_top" class="sc_anchor" title="To Top" data-description="&lt;i&gt;Back to top&lt;/i&gt; - &lt;br&gt;scroll to top of the page" data-icon="icon-angle-double-up" data-url="" data-separator="yes"></a>
+    <!-- Body -->
+    <div class="body_wrap">
+        <div class="page_wrap">
+            <div class="top_panel_fixed_wrap"></div>
+
+            <!-- Page title -->
+            <div class="page_top_wrap page_top_title page_top_breadcrumbs sc_pt_st1">
+                <div class="content_wrap">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <a class="breadcrumbs_item all" href="/Courses/Index">Courses</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <span class="breadcrumbs_item current">Checkout</span>
+                    </div>
+                    <h1 class="page_title">Checkout</h1>
+                </div>
+            </div>
+            <!-- /Page title -->
+            <!-- Content -->
+            @if (TempData["message"] != null)
+            {
+                <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+                    @Html.Raw(@TempData["message"])
+                </div>
+            }
+            <div class="page_content_wrap">
+                <div class="content_wrap">
+                    <div class="content">
+                        <article class="post_item post_item_single page">
+                            <section class="post_content">
+                                <div class="woocommerce">
+                                   
+
+                                    <form name="checkout" method="post" class="checkout woocommerce-checkout" action="/CodeHub/Checkout" enctype="multipart/form-data">
+                                        <h3 id="order_review_heading">Your order</h3>
+                                        <div id="order_review" class="woocommerce-checkout-review-order">
+                                            <table class="shop_table woocommerce-checkout-review-order-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="product-name">Product</th>
+                                                        <th class="product-total">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var k in Model)
+                                                    {
+                                                        <tr class="cart_item">
+                                                            <td class="product-name">
+                                                                @k.course.course_name
+
+                                                            </td>
+                                                            <td class="product-total">
+                                                                <span class="amount">@k.price</span>
+                                                            </td>
+                                                        </tr>
+
+                                                    }
+
+                                                </tbody>
+                                                <tfoot>
+
+                                                    <tr class="order-total">
+                                                        <th>Total</th>
+                                                        <td><strong><span class="amount">&pound;@Model.First().cart.total</span></strong> </td>
+                                                    </tr>
+
+                                                </tfoot>
+
+                                            </table>
+                                            <div id="payment" class="woocommerce-checkout-payment">
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col2-set" id="customer_details">
+                                            <div class="col-1">
+                                                <div class="woocommerce-billing-fields">
+                                                    <h3>Billing Details</h3>
+                                                    <div class="create-account">
+                                                        <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+
+                                                    </div>
+                                                    <p class="form-row form-row-first" id="billing_first_name_field">
+                                                        <label for="billing_first_name" class="">First Name <abbr class="required" title="required">*</abbr></label>
+                                                        <input type="text" class="input-text" name="firstname" id="billing_first_name" placeholder="" value="" />
+                                                    </p>
+                                                    <p class="form-row form-row-last" id="billing_last_name_field">
+                                                        <label for="billing_last_name" class="">Last Name <abbr class="required" title="required">*</abbr></label>
+                                                        <input type="text" class="input-text" name="lastname" id="billing_last_name" placeholder="" value="" />
+                                                    </p>
+                                                    <div class="clear"></div>
+
+                                                  
+                                                    <div id="paypal-button-container"></div>
+                                                    <script>
+                                                        let amount = @Model.First().cart.total;
+                                                        let url = '@(Url.Action("Thankyou", "CodeHub"))';
+                                                        let redirecturl = '@(Url.Action("Thankyou", "CodeHub"))';
+                                                        let frstname = document.getElementById("billing_first_name").value;
+                                                        let lstname = document.getElementById("billing_last_name").value
+                                                    paypal.Buttons({
+
+
+                                                    style: {
+                                                    layout:  'vertical',
+                                                    color:   'blue',
+                                                    shape:   'pill',
+                                                    label:   'paypal'
+                                                    },
+                                                    // Sets up the transaction when a payment button is clicked
+                                                    createOrder: (data, actions) => {
+                                                        frstname = document.getElementById("billing_first_name").value;
+                                                        lstname = document.getElementById("billing_last_name").value;
+                                                   
+                                                    return actions.order.create({
+                                                    purchase_units: [{
+                                                    amount: {
+                                                    value: amount, // Can also reference a variable or function
+                                                    }
+                                                    }]
+                                                    });
+                                                    },
+
+
+
+                                                    // Finalize the transaction after payer approval
+
+
+                                                    onApprove: (data, actions) => {
+                                                    return actions.order.capture().then(function(orderData) {
+                                                    // Successful capture! For dev/demo purposes:
+                                                    //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                                    const transaction = orderData.purchase_units[0].payments.captures[0];
+                                                     alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+
+
+                                                    senddata();
+                                                    function senddata()
+                                                    {
+                                                        console.log("abc");
+                                                    fetch(url,{
+                                                    method:"POST",
+                                                    headers:{
+                                                    "Content-type":"application/json",
+
+
+                                                    },
+                                                    body:JSON.stringify({
+
+                                                    transactionID:transaction.id,
+                                                    status:transaction.status,
+                                                    amount_paid:transaction.amount['value'],
+                                                    frstname:frstname,
+                                                    lstname : lstname,
+
+                                                    }),
+                                                    })
+                                                    .then(response=>response.json())
+                                                    .then(data=>{
+                                                    window.location.href=redirecturl;
+                                                    });
+
+                                                    }
+
+                                                    });
+                                                    }
+                                                    }).render('#paypal-button-container');
+                                                    </script>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                      
+                                    </form>
+                                </div>
+                            </section>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <!-- /Content -->
+            <!-- Contacts Footer  -->
+            <!-- /Contacts Footer -->
+            <!-- Copyright -->
+            <!-- /Copyright -->
+        </div>
+    </div>
+    <!-- /Body -->
+    <a href="#" class="scroll_to_top icon-up-2" title="Scroll to top"></a>
+
+    <div class="custom_html_section"></div>
+
+   
+
+</body>

@@ -1,0 +1,69 @@
+﻿
+<div class="toolbar">
+    <!--begin::Toolbar-->
+    <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-5">
+            <!--begin::Title-->
+            <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Dashbaord</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="index.html" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Dashboard</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">Admin</li>
+                <!--end::Breadcrumb-->
+                
+                <!--end::Item-->
+            </ul>
+        </div>
+        <!--end::Page title-->
+        <!--begin::Action group-->
+    
+        <!--end::Action group-->
+    </div>
+    <!--end::Toolbar-->
+</div>
+@if (TempData["message"] != null)
+{
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+        @Html.Raw(@TempData["message"])
+    </div>
+}
+<div class="card-body p-0">
+    <!--begin::Wrapper-->
+    <div class="card-px text-center py-20 my-10">
+        <!--begin::Title-->
+        <h2 class="fs-2x fw-bolder mb-10">Welcome!</h2>
+        <!--end::Title-->
+        <!--begin::Description-->
+     
+        <!--end::Description-->
+        <!--begin::Action-->
+
+        <!--end::Action-->
+    </div>
+    <!--end::Wrapper-->
+    <!--begin::Illustration-->
+    <div class="text-center px-4">
+        <img class="mw-100 mh-300px" alt="" src="../../assets/media/illustrations/sketchy-1/2.png" />
+    </div>
+    <!--end::Illustration-->
+</div>

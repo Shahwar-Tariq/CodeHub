@@ -1,0 +1,1287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="code_hubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AssignCourse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="total" Type="float" />
+        </EntityType>
+        <EntityType Name="cart_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+          <Property Name="cart_id" Type="int" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="content">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+          <Property Name="topic_id" Type="int" />
+          <Property Name="content_description" Type="text" Nullable="false" />
+          <Property Name="filesize" Type="int" />
+          <Property Name="videoname" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="course_code" />
+          </Key>
+          <Property Name="course_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="course_name" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="10" />
+          <Property Name="image" Type="varchar" MaxLength="100" />
+          <Property Name="summary" Type="text" />
+        </EntityType>
+        <EntityType Name="favorite_courses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="send_by" Type="int" />
+          <Property Name="details" Type="text" />
+          <Property Name="feedbackfor" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="feedback_reply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="replied_by" Type="int" />
+          <Property Name="feedback_id" Type="int" />
+          <Property Name="reply" Type="text" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="payed_amount" Type="float" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="payment_id" Type="varchar" MaxLength="50" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quiz_id" Type="int" />
+          <Property Name="question_name" Type="varchar" MaxLength="200" />
+          <Property Name="answer" Type="varchar" MaxLength="200" />
+          <Property Name="option1" Type="varchar" MaxLength="200" />
+          <Property Name="option2" Type="varchar" MaxLength="200" />
+          <Property Name="option3" Type="varchar" MaxLength="200" />
+          <Property Name="option4" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="quiz">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+          <Property Name="topic_id" Type="int" />
+          <Property Name="quiz_number" Type="smallint" />
+          <Property Name="quiz_name" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="topic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+          <Property Name="topic_name" Type="varchar" MaxLength="50" />
+          <Property Name="topic_number" Type="int" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="image_path" Type="varchar" MaxLength="50" />
+          <Property Name="skills" Type="varchar" MaxLength="30" />
+          <Property Name="cv" Type="varchar" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="ansone" Type="varchar" MaxLength="500" />
+          <Property Name="anstwo" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_AssignCourse_Course">
+          <End Role="course" Type="Self.course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignCourse" Type="Self.AssignCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="AssignCourse">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignCourse_user">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignCourse" Type="Self.AssignCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="AssignCourse">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_item_cart">
+          <End Role="cart" Type="Self.cart" Multiplicity="0..1" />
+          <End Role="cart_item" Type="Self.cart_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cart_item">
+              <PropertyRef Name="cart_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_item_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="cart_item" Type="Self.cart_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="cart_item">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_topic">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorite_courses_courses">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favorite_courses" Type="Self.favorite_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="favorite_courses">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorite_courses_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="favorite_courses" Type="Self.favorite_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="favorite_courses">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feedback_reply_feedback">
+          <End Role="feedback" Type="Self.feedback" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="feedback_reply" Type="Self.feedback_reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="feedback">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="feedback_reply">
+              <PropertyRef Name="feedback_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feedback_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="send_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_order">
+          <End Role="order" Type="Self.order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_question_quiz">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="quiz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_topic">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_topic_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="topic" Type="Self.topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="topic">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_topic_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="topic" Type="Self.topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="topic">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="code_hubModelStoreContainer">
+          <EntitySet Name="AssignCourse" EntityType="Self.AssignCourse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cart_item" EntityType="Self.cart_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="content" EntityType="Self.content" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="favorite_courses" EntityType="Self.favorite_courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback_reply" EntityType="Self.feedback_reply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quiz" EntityType="Self.quiz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="topic" EntityType="Self.topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AssignCourse_Course" Association="Self.FK_AssignCourse_Course">
+            <End Role="course" EntitySet="course" />
+            <End Role="AssignCourse" EntitySet="AssignCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignCourse_user" Association="Self.FK_AssignCourse_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="AssignCourse" EntitySet="AssignCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_item_cart" Association="Self.FK_cart_item_cart">
+            <End Role="cart" EntitySet="cart" />
+            <End Role="cart_item" EntitySet="cart_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_item_course" Association="Self.FK_cart_item_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="cart_item" EntitySet="cart_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_user" Association="Self.FK_cart_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_course" Association="Self.FK_content_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="content" EntitySet="content" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_topic" Association="Self.FK_content_topic">
+            <End Role="topic" EntitySet="topic" />
+            <End Role="content" EntitySet="content" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_user" Association="Self.FK_content_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="content" EntitySet="content" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorite_courses_courses" Association="Self.FK_favorite_courses_courses">
+            <End Role="course" EntitySet="course" />
+            <End Role="favorite_courses" EntitySet="favorite_courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorite_courses_user" Association="Self.FK_favorite_courses_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="favorite_courses" EntitySet="favorite_courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feedback_reply_feedback" Association="Self.FK_feedback_reply_feedback">
+            <End Role="feedback" EntitySet="feedback" />
+            <End Role="feedback_reply" EntitySet="feedback_reply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feedback_user" Association="Self.FK_feedback_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="feedback" EntitySet="feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_course" Association="Self.FK_order_details_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_order" Association="Self.FK_order_details_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_question_quiz" Association="Self.FK_question_quiz">
+            <End Role="quiz" EntitySet="quiz" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_course" Association="Self.FK_quiz_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="quiz" EntitySet="quiz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_topic" Association="Self.FK_quiz_topic">
+            <End Role="topic" EntitySet="topic" />
+            <End Role="quiz" EntitySet="quiz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_user" Association="Self.FK_quiz_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="quiz" EntitySet="quiz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_topic_course" Association="Self.FK_topic_course">
+            <End Role="course" EntitySet="course" />
+            <End Role="topic" EntitySet="topic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_topic_user" Association="Self.FK_topic_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="topic" EntitySet="topic" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="code_hubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AssignCourse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="course" Relationship="Self.FK_AssignCourse_Course" FromRole="AssignCourse" ToRole="course" />
+          <NavigationProperty Name="user" Relationship="Self.FK_AssignCourse_user" FromRole="AssignCourse" ToRole="user" />
+        </EntityType>
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="total" Type="Double" />
+          <NavigationProperty Name="cart_item" Relationship="Self.FK_cart_item_cart" FromRole="cart" ToRole="cart_item" />
+          <NavigationProperty Name="user" Relationship="Self.FK_cart_user" FromRole="cart" ToRole="user" />
+        </EntityType>
+        <EntityType Name="cart_item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cart_id" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="cart" Relationship="Self.FK_cart_item_cart" FromRole="cart_item" ToRole="cart" />
+          <NavigationProperty Name="course" Relationship="Self.FK_cart_item_course" FromRole="cart_item" ToRole="course" />
+        </EntityType>
+        <EntityType Name="content">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="topic_id" Type="Int32" />
+          <Property Name="content_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="filesize" Type="Int32" />
+          <Property Name="videoname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="course" Relationship="Self.FK_content_course" FromRole="content" ToRole="course" />
+          <NavigationProperty Name="topic" Relationship="Self.FK_content_topic" FromRole="content" ToRole="topic" />
+          <NavigationProperty Name="user" Relationship="Self.FK_content_user" FromRole="content" ToRole="user" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="course_code" />
+          </Key>
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AssignCourses" Relationship="Self.FK_AssignCourse_Course" FromRole="course" ToRole="AssignCourse" />
+          <NavigationProperty Name="cart_item" Relationship="Self.FK_cart_item_course" FromRole="course" ToRole="cart_item" />
+          <NavigationProperty Name="contents" Relationship="Self.FK_content_course" FromRole="course" ToRole="content" />
+          <NavigationProperty Name="favorite_courses" Relationship="Self.FK_favorite_courses_courses" FromRole="course" ToRole="favorite_courses" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK_order_details_course" FromRole="course" ToRole="order_details" />
+          <NavigationProperty Name="quizs" Relationship="Self.FK_quiz_course" FromRole="course" ToRole="quiz" />
+          <NavigationProperty Name="topics" Relationship="Self.FK_topic_course" FromRole="course" ToRole="topic" />
+        </EntityType>
+        <EntityType Name="favorite_courses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="course" Relationship="Self.FK_favorite_courses_courses" FromRole="favorite_courses" ToRole="course" />
+          <NavigationProperty Name="user" Relationship="Self.FK_favorite_courses_user" FromRole="favorite_courses" ToRole="user" />
+        </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="send_by" Type="Int32" />
+          <Property Name="details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="feedbackfor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="feedback_reply" Relationship="Self.FK_feedback_reply_feedback" FromRole="feedback" ToRole="feedback_reply" />
+          <NavigationProperty Name="user" Relationship="Self.FK_feedback_user" FromRole="feedback" ToRole="user" />
+        </EntityType>
+        <EntityType Name="feedback_reply">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="replied_by" Type="Int32" />
+          <Property Name="feedback_id" Type="Int32" />
+          <Property Name="reply" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="feedback" Relationship="Self.FK_feedback_reply_feedback" FromRole="feedback_reply" ToRole="feedback" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="payed_amount" Type="Double" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="payment_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK_order_details_order" FromRole="order" ToRole="order_details" />
+          <NavigationProperty Name="user" Relationship="Self.FK_order_user" FromRole="order" ToRole="user" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="course" Relationship="Self.FK_order_details_course" FromRole="order_details" ToRole="course" />
+          <NavigationProperty Name="order" Relationship="Self.FK_order_details_order" FromRole="order_details" ToRole="order" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quiz_id" Type="Int32" />
+          <Property Name="question_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="option1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="option2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="option3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="option4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="quiz" Relationship="Self.FK_question_quiz" FromRole="question" ToRole="quiz" />
+        </EntityType>
+        <EntityType Name="quiz">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="topic_id" Type="Int32" />
+          <Property Name="quiz_number" Type="Int16" />
+          <Property Name="quiz_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="course" Relationship="Self.FK_quiz_course" FromRole="quiz" ToRole="course" />
+          <NavigationProperty Name="questions" Relationship="Self.FK_question_quiz" FromRole="quiz" ToRole="question" />
+          <NavigationProperty Name="topic" Relationship="Self.FK_quiz_topic" FromRole="quiz" ToRole="topic" />
+          <NavigationProperty Name="user" Relationship="Self.FK_quiz_user" FromRole="quiz" ToRole="user" />
+        </EntityType>
+        <EntityType Name="topic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="topic_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="topic_number" Type="Int32" />
+          <NavigationProperty Name="contents" Relationship="Self.FK_content_topic" FromRole="topic" ToRole="content" />
+          <NavigationProperty Name="course" Relationship="Self.FK_topic_course" FromRole="topic" ToRole="course" />
+          <NavigationProperty Name="quizs" Relationship="Self.FK_quiz_topic" FromRole="topic" ToRole="quiz" />
+          <NavigationProperty Name="user" Relationship="Self.FK_topic_user" FromRole="topic" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image_path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="skills" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cv" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="ansone" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="anstwo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AssignCourses" Relationship="Self.FK_AssignCourse_user" FromRole="user" ToRole="AssignCourse" />
+          <NavigationProperty Name="carts" Relationship="Self.FK_cart_user" FromRole="user" ToRole="cart" />
+          <NavigationProperty Name="contents" Relationship="Self.FK_content_user" FromRole="user" ToRole="content" />
+          <NavigationProperty Name="favorite_courses" Relationship="Self.FK_favorite_courses_user" FromRole="user" ToRole="favorite_courses" />
+          <NavigationProperty Name="feedbacks" Relationship="Self.FK_feedback_user" FromRole="user" ToRole="feedback" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_user" FromRole="user" ToRole="order" />
+          <NavigationProperty Name="quizs" Relationship="Self.FK_quiz_user" FromRole="user" ToRole="quiz" />
+          <NavigationProperty Name="topics" Relationship="Self.FK_topic_user" FromRole="user" ToRole="topic" />
+        </EntityType>
+        <Association Name="FK_AssignCourse_Course">
+          <End Role="course" Type="Self.course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignCourse" Type="Self.AssignCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="AssignCourse">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssignCourse_user">
+          <End Role="user" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AssignCourse" Type="Self.AssignCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="AssignCourse">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_item_cart">
+          <End Role="cart" Type="Self.cart" Multiplicity="0..1" />
+          <End Role="cart_item" Type="Self.cart_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cart_item">
+              <PropertyRef Name="cart_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_item_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="cart_item" Type="Self.cart_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="cart_item">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_topic">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_content_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="content" Type="Self.content" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="content">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorite_courses_courses">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="favorite_courses" Type="Self.favorite_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="favorite_courses">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_topic_course">
+          <End Role="course" Type="Self.course" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="topic" Type="Self.topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="course">
+              <PropertyRef Name="course_code" />
+            </Principal>
+            <Dependent Role="topic">
+              <PropertyRef Name="course_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorite_courses_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="favorite_courses" Type="Self.favorite_courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="favorite_courses">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feedback_reply_feedback">
+          <End Role="feedback" Type="Self.feedback" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="feedback_reply" Type="Self.feedback_reply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="feedback">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="feedback_reply">
+              <PropertyRef Name="feedback_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feedback_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="feedback" Type="Self.feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="feedback">
+              <PropertyRef Name="send_by" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_order">
+          <End Role="order" Type="Self.order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_question_quiz">
+          <End Role="quiz" Type="Self.quiz" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="quiz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_topic">
+          <End Role="topic" Type="Self.topic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="topic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="topic_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_quiz_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="quiz" Type="Self.quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="quiz">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_topic_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="topic" Type="Self.topic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="topic">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="code_hubEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AssignCourses" EntityType="Self.AssignCourse" />
+          <EntitySet Name="carts" EntityType="Self.cart" />
+          <EntitySet Name="cart_item" EntityType="Self.cart_item" />
+          <EntitySet Name="contents" EntityType="Self.content" />
+          <EntitySet Name="courses" EntityType="Self.course" />
+          <EntitySet Name="favorite_courses" EntityType="Self.favorite_courses" />
+          <EntitySet Name="feedbacks" EntityType="Self.feedback" />
+          <EntitySet Name="feedback_reply" EntityType="Self.feedback_reply" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="quizs" EntityType="Self.quiz" />
+          <EntitySet Name="topics" EntityType="Self.topic" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_AssignCourse_Course" Association="Self.FK_AssignCourse_Course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="AssignCourse" EntitySet="AssignCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssignCourse_user" Association="Self.FK_AssignCourse_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="AssignCourse" EntitySet="AssignCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_item_cart" Association="Self.FK_cart_item_cart">
+            <End Role="cart" EntitySet="carts" />
+            <End Role="cart_item" EntitySet="cart_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_user" Association="Self.FK_cart_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_item_course" Association="Self.FK_cart_item_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="cart_item" EntitySet="cart_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_course" Association="Self.FK_content_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="content" EntitySet="contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_topic" Association="Self.FK_content_topic">
+            <End Role="topic" EntitySet="topics" />
+            <End Role="content" EntitySet="contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_content_user" Association="Self.FK_content_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="content" EntitySet="contents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorite_courses_courses" Association="Self.FK_favorite_courses_courses">
+            <End Role="course" EntitySet="courses" />
+            <End Role="favorite_courses" EntitySet="favorite_courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_course" Association="Self.FK_order_details_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_course" Association="Self.FK_quiz_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="quiz" EntitySet="quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_topic_course" Association="Self.FK_topic_course">
+            <End Role="course" EntitySet="courses" />
+            <End Role="topic" EntitySet="topics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorite_courses_user" Association="Self.FK_favorite_courses_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="favorite_courses" EntitySet="favorite_courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feedback_reply_feedback" Association="Self.FK_feedback_reply_feedback">
+            <End Role="feedback" EntitySet="feedbacks" />
+            <End Role="feedback_reply" EntitySet="feedback_reply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feedback_user" Association="Self.FK_feedback_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="feedback" EntitySet="feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_order" Association="Self.FK_order_details_order">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_user" Association="Self.FK_order_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_question_quiz" Association="Self.FK_question_quiz">
+            <End Role="quiz" EntitySet="quizs" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_topic" Association="Self.FK_quiz_topic">
+            <End Role="topic" EntitySet="topics" />
+            <End Role="quiz" EntitySet="quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_quiz_user" Association="Self.FK_quiz_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="quiz" EntitySet="quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_topic_user" Association="Self.FK_topic_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="topic" EntitySet="topics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="code_hubModelStoreContainer" CdmEntityContainer="code_hubEntities7">
+          <EntitySetMapping Name="AssignCourses">
+            <EntityTypeMapping TypeName="code_hubModel.AssignCourse">
+              <MappingFragment StoreEntitySet="AssignCourse">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="code_hubModel.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cart_item">
+            <EntityTypeMapping TypeName="code_hubModel.cart_item">
+              <MappingFragment StoreEntitySet="cart_item">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contents">
+            <EntityTypeMapping TypeName="code_hubModel.content">
+              <MappingFragment StoreEntitySet="content">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="topic_id" ColumnName="topic_id" />
+                <ScalarProperty Name="content_description" ColumnName="content_description" />
+                <ScalarProperty Name="filesize" ColumnName="filesize" />
+                <ScalarProperty Name="videoname" ColumnName="videoname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courses">
+            <EntityTypeMapping TypeName="code_hubModel.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="course_name" ColumnName="course_name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="summary" ColumnName="summary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="favorite_courses">
+            <EntityTypeMapping TypeName="code_hubModel.favorite_courses">
+              <MappingFragment StoreEntitySet="favorite_courses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedbacks">
+            <EntityTypeMapping TypeName="code_hubModel.feedback">
+              <MappingFragment StoreEntitySet="feedback">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="send_by" ColumnName="send_by" />
+                <ScalarProperty Name="details" ColumnName="details" />
+                <ScalarProperty Name="feedbackfor" ColumnName="feedbackfor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feedback_reply">
+            <EntityTypeMapping TypeName="code_hubModel.feedback_reply">
+              <MappingFragment StoreEntitySet="feedback_reply">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="replied_by" ColumnName="replied_by" />
+                <ScalarProperty Name="feedback_id" ColumnName="feedback_id" />
+                <ScalarProperty Name="reply" ColumnName="reply" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="code_hubModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="payed_amount" ColumnName="payed_amount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_details">
+            <EntityTypeMapping TypeName="code_hubModel.order_details">
+              <MappingFragment StoreEntitySet="order_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="code_hubModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quiz_id" ColumnName="quiz_id" />
+                <ScalarProperty Name="question_name" ColumnName="question_name" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="option1" ColumnName="option1" />
+                <ScalarProperty Name="option2" ColumnName="option2" />
+                <ScalarProperty Name="option3" ColumnName="option3" />
+                <ScalarProperty Name="option4" ColumnName="option4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quizs">
+            <EntityTypeMapping TypeName="code_hubModel.quiz">
+              <MappingFragment StoreEntitySet="quiz">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="topic_id" ColumnName="topic_id" />
+                <ScalarProperty Name="quiz_number" ColumnName="quiz_number" />
+                <ScalarProperty Name="quiz_name" ColumnName="quiz_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="topics">
+            <EntityTypeMapping TypeName="code_hubModel.topic">
+              <MappingFragment StoreEntitySet="topic">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="topic_name" ColumnName="topic_name" />
+                <ScalarProperty Name="topic_number" ColumnName="topic_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="code_hubModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="cv" ColumnName="cv" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ansone" ColumnName="ansone" />
+                <ScalarProperty Name="anstwo" ColumnName="anstwo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

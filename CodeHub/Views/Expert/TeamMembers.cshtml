@@ -1,0 +1,105 @@
+﻿@model IEnumerable<CodeHub.Models.user>
+@{
+    ViewBag.Title = "TeamMembers";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+            <!-- Page title -->
+            <div class="page_top_wrap page_top_title page_top_breadcrumbs">
+                <div class="content_wrap">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <span class="breadcrumbs_item current">Team Members</span>
+                    </div>
+                    <h3 class="page_title">Our Experts</h3>
+                </div>
+            </div>
+            <!-- Page title -->
+            <!-- Content -->
+@if (TempData["message"] != null)
+{
+    <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+        @Html.Raw(@TempData["message"])
+    </div>
+}
+            <div class="page_content_wrap">
+                <div class="content">
+                    <article class="post_item post_item_single page type-page">
+                        <section class="post_content">
+                            <div class="sc_section accent_top" data-animation="animated fadeInUp normal sc_bg1">
+                                <div class="sc_section_overlay">
+                                    <div class="sc_section_content">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sc_section" data-animation="animated fadeInUp normal">
+                                <div class="sc_content content_wrap margin_top_3em_imp margin_bottom_3em_imp">
+                                    
+                                    <div class="sc_team sc_team_style_1" data-animation="animated fadeInUp normal">
+                                        <div class="sc_columns columns_wrap">
+                                            @foreach (var e in Model)
+                                            {
+                                            <div class="column-1_3">
+                                                <div class="sc_team_item sc_team_item_1 odd first">
+                                                    @if (e.image_path != null)
+                                                    {
+                                                        <div class="sc_team_item_avatar">
+                                                            <img alt="" src="~/Images/profile_images/@e.image_path" style="height:250px;width:343.9px">
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="sc_team_item_avatar">
+                                                            <img alt="" src="~/assets/images/user-windows-10-user-icon-png-transparent-png.png" style="height:250px;width:343.9px">
+                                                        </div>
+                                                    }
+                                                    <div class="sc_team_item_info">
+                                                        <h6 class="sc_team_item_title">
+                                                            <a @*href="/Expert/PersonalPage?id=@e.user_id"*@>@e.first_name @e.last_name</a>
+                                                        </h6>
+                                                        <div class="sc_team_item_position">@e.skills</div>
+ 
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="sc_line sc_line_style_solid margin_top_1em"></div>
+                                    
+                                   
+                                </div>
+                            </div>
+                           
+                        </section>
+                    </article>
+                </div>
+            </div>
+            <!-- /Content -->
+            <!-- Widgets Footer -->
+            <footer class="footer_wrap bg_tint_light footer_style_white widget_area">
+                <div class="content_wrap">
+                    <div class="columns_wrap">
+                        <!-- Calendar widget -->
+                  
+                        <!-- /Calendar widget -->
+                        <!-- Popular courses widget -->
+                  
+                        <!-- /Popular courses widget -->
+                        <!-- Recent courses widget -->
+                  
+                        <!-- /Recent courses widget -->
+                    </div>
+                </div>
+            </footer>
+            <!-- /Widgets Footer -->
+            <!-- Contacts Footer -->
+           
+            <!-- /Contacts Footer -->
+            <!-- Copyright -->
+           
+            <!-- /Copyright -->
+       

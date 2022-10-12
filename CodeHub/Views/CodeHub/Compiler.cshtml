@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Compiler";
+    Layout = "~/Views/Shared/NoLayout.cshtml";
+}
+<style>
+    .navbar {
+        overflow: hidden;
+        background-color: darkgreen;
+    }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+    .subnav {
+        float: left;
+        overflow: hidden;
+    }
+
+        .subnav .subnavbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: green;
+        }
+
+    .subnav-content {
+        display: none;
+        position: absolute;
+        left: 0;
+        background-color: green;
+        width: 100%;
+        z-index: 1;
+        height: 35px;
+        padding-bottom: 4px;
+    }
+
+        .subnav-content select {
+            float: left;
+            color: white;
+            text-decoration: none;
+        }
+
+        .subnav-content a:hover {
+            background-color: #eee;
+            color: black;
+        }
+
+    .subnav:hover .subnav-content {
+        display: block;
+    }
+
+    .main-div {
+        height: 45px;
+        width: 100%;
+        border-left-color: seagreen;
+        border-left-style: solid;
+        border-left-width: 2px;
+        border-right-color: seagreen;
+        border-right-style: solid;
+        border-right-width: 2px;
+        border-top-color: seagreen;
+        border-top-style: solid;
+        border-top-width: 2px;
+    }
+
+    .left-div {
+        height: 550px;
+        width: 49.80%;
+        float: left;
+        background-color: aliceblue;
+        border-right-color: black;
+        border-right-width: 2px;
+        border-right-style: solid;
+    }
+
+    .right-div {
+        height: 550px;
+        width: 49.90%;
+        float: right;
+        background-color: black;
+        border-left-color: black;
+        border-left-width: 2px;
+        border-left-style: solid;
+        color: white;
+    }
+
+    div {
+        display: block;
+    }
+</style>
+
+
+
+<div class="main-div">
+
+    <div class="navbar">
+        <a href="/CodeHub/Index">Home</a>
+        <div style="margin-top:15px">
+
+            <select name="compiler" id="compiler" class="country_to_state country_select">
+                <option selected value="">Select a Language&hellip;</option>
+                <option  value="Html">Html/CSS</option>
+                <option value="javascript">JavaScript</option>
+                <option value="c">C</option>
+                <option value="c++">C++</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+             
+
+            </select>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<hr />
+<div style="margin-bottom:10px">
+    <button id="run" style="height:25px;width:50px;background-color:green;color:white">Run</button>
+</div>
+<textarea class="left-div" id="code"></textarea>
+
+<div class="right-div" style="overflow:scroll" id="exe">
+    @Model
+</div>
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script>
+    var currentLang = "";
+    var tempDiv = document.createElement('div');
+    var s = localStorage.getItem("code").toString();
+    s = s.replaceAll("<br>", "");
+    tempDiv.innerHTML = s;
+    tempDiv.removeChild(tempDiv.lastChild);
+    var s = tempDiv.innerHTML;
+    s = s.replaceAll("&lt;", "<");
+    s = s.replaceAll("&gt;", ">");
+    s = s.replaceAll("&nbsp;", " ");
+    
+
+    $("#code").html(tempDiv.innerHTML);
+    $("#exe").html(s);
+
+    $("#compiler").change(function (e) {
+        console.log(e.target.value)
+        currentLang =e.target.value;
+    })
+    $("#run").click(function (e) {
+        if(currentLang != "Html" && currentLang != "javascript" )
+        {
+            var code = $("#code").val();
+            if (currentLang == "c" || currentLang == "c++")
+            {
+
+                var s = code.replaceAll("<", "$1");
+                s = s.replaceAll(">", "$2");
+                code = s;
+                console.log(code);
+            }
+        
+            $.ajax({
+               
+                url: "/CodeHub/Compiler",
+                method : "POST",
+                data: { lang: currentLang, code: code },
+            }).done(function (res) {
+                $("#exe").html(res);
+            });
+        }
+        else
+        {
+            var code = $("#code").html();
+
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = $("#code").val()
+                code = tempDiv.innerHTML;
+                var s = code.replaceAll("&lt;", "<");
+                s = s.replaceAll("&gt;", ">");
+                s = s.replaceAll("&nbsp;", " ");
+                s = s.replaceAll("<br>", "");
+                $("#exe").html(s);
+        }
+    })
+</script>

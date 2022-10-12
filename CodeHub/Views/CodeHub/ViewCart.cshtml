@@ -1,0 +1,140 @@
+﻿@model IEnumerable<CodeHub.Models.cart_item>
+@{
+    ViewBag.Title = "BuyCourse";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+
+<body class="page body_style_wide body_filled article_style_boxed layout_single-standard top_panel_style_light top_panel_opacity_solid top_panel_above menu_right sidebar_hide woocommerce-cart woocommerce-page ">
+    <a id="toc_top" class="sc_anchor" title="To Top" data-description="&lt;i&gt;Back to top&lt;/i&gt; - &lt;br&gt;scroll to top of the page" data-icon="icon-angle-double-up" data-url="" data-separator="yes"></a>
+    <!-- Body -->
+    <div class="body_wrap">
+        <div class="page_wrap">
+            <div class="top_panel_fixed_wrap"></div>
+            <!-- Page title -->
+            <div class="page_top_wrap page_top_title page_top_breadcrumbs sc_pt_st1">
+                <div class="content_wrap">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <a class="breadcrumbs_item all" href="/Courses/Index">Courses</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <span class="breadcrumbs_item current">Your cart</span>
+                    </div>
+                    <h1 class="page_title">Your cart</h1>
+                </div>
+            </div>
+            <!-- /Page title -->
+            <!-- Content -->
+
+            <div class="page_content_wrap">
+                <div class="content_wrap">
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+                            @Html.Raw(@TempData["message"])
+                        </div>
+                    }
+                    <div class="content">
+                        <article class="post_item post_item_single page type-page sc_cart_st1">
+                            <section class="post_content">
+                                <div class="woocommerce">
+                                    <form action="/CodeHub/BuyCourse" method="post">
+                                        <table class="shop_table cart">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-remove">Remove</th>
+
+                                                    <th class="product-name">Product</th>
+                                                    <th class="product-price">Price</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var k in Model)
+                                                {
+                                                    if (Model.Count() == 0)
+                                                    {
+                                                        <tr>
+                                                            <td>Cart is empty</td>
+                                                        </tr>
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr class="cart_item">
+                                                            <td class="product-remove">
+                                                                <a href="/CodeHub/RemoveItem?id=@k.id" class="remove" title="Remove this item">&times;</a>
+                                                            </td>
+
+                                                            <td class="productname" value="@k.course_code">
+                                                                @k.course.course_name
+                                                            </td>
+                                                            <td class="productprice" value="@k.price">
+                                                                @k.price
+                                                            </td>
+
+
+                                                        </tr>
+                                                    }
+                                                }
+
+                                                @*<tr>
+                                                        <td colspan="6" class="actions">
+                                                            <input type="submit" class="button" name="update_cart" value="Update Cart" />
+                                                    </tr>*@
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                    <div class="cart-collaterals">
+                                        <div class="cart_totals ">
+                                            <h2>Cart Totals</h2>
+                                            <table style="width:100%">
+                                                <tr class="cart-subtotal"></tr>
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    @if (Model.Count() == 0)
+                                                    {
+                                                        <td>
+                                                            <strong><span class="amount">&pound;0</span></strong>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <strong><span class="amount">&pound;@Model.First().cart.total</span></strong>
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            </table>
+                                            <br />
+                                            <br />
+                                            @if (Model.Count() == 0)
+                                            {
+                                                <div class="wc-proceed-to-checkout">
+                                                    <h3>Cart is Empty</h3>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wc-proceed-to-checkout">
+                                                    <a href="/CodeHub/Checkout" class="checkout-button button alt wc-forward">Proceed to Checkout</a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!-- /Content -->
+            <!-- Contacts Footer  -->
+            <!-- /Contacts Footer -->
+            <!-- Copyright -->
+            <!-- /Copyright -->
+        </div>
+    </div>
+    <!-- /Body -->
+
+</body>

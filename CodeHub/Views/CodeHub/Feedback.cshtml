@@ -1,0 +1,165 @@
+﻿@model CodeHub.ViewModel.courseFeedback
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+
+<body class="single body_style_wide body_filled article_style_stretch top_panel_style_light top_panel_opacity_solid top_panel_above menu_right sidebar_hide">
+    <a class="sc_anchor" title="To Top" data-description="&lt;i&gt;Back to top&lt;/i&gt; - &lt;br&gt;scroll to top of the page" data-icon="icon-angle-double-up" data-url="" data-separator="yes"></a>
+    <!-- Body -->
+    <div class="body_wrap">
+        <div class="page_wrap">
+
+            <header class="top_panel_wrap bg_tint_light">
+                <!-- User menu -->
+                <!-- /User menu -->
+                <!-- Main menu -->
+                <!-- /Main menu -->
+            </header>
+            <!-- Page title -->
+            <div class="page_top_wrap page_top_title page_top_breadcrumbs sc_pt_st1">
+                <div class="content_wrap">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <span class="breadcrumbs_item current">Feedback</span>
+                    </div>
+                    <h1 class="page_title">Feedback</h1>
+                </div>
+            </div>
+            <!-- /Page title -->
+            <!-- Content -->
+         
+            <div class="page_content_wrap">
+             
+                <div class="content_wrap">
+                    <div class="content">
+                        @if (TempData["message"] != null)
+                       {
+                            <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+                                @Html.Raw(@TempData["message"])
+                            </div>
+                        }
+                        <section class="related_wrap related_wrap_empty"></section>
+                        <section class="comments_wrap">
+
+                            <div id="comments" class="comments_list_wrap">
+                                <h2 class="section_title comments_list_title">@Model.fbs.Count() Feedbacks</h2>
+                                @foreach (var data in Model.fbs)
+                                {
+                                    <ul class="comments_list">
+                                        <li class="comment even thread-even depth-1 comment_item">
+                                            <div class="comment_author_avatar">
+                                                <img alt="" src="~/assets/images/user-windows-10-user-icon-png-transparent-png.png" class="avatar avatar-75 photo" height="75" width="75" />
+                                            </div>
+                                            <div class="comment_content">
+                                                <div class="comment_info">
+                                                    <span class="comment_author">@data.user.first_name @data.user.last_name</span>
+                                                   
+                                                    <span class="comment_course">Feedback For @data.feedbackfor</span>
+                                                </div>
+                                                <div class="comment_text_wrap">
+                                                    <div class="comment_text">
+                                                        <p>@data.details</p>
+                                                    </div>
+                                                  
+                                                       @if (Model.fbsr.SingleOrDefault(x => x.feedback_id == data.id) != null)
+                                                       {
+                                                           var replied_by = @Model.fbsr.SingleOrDefault(x => x.feedback_id == data.id).replied_by;
+                                                        <div class="comment_info">
+                                                           <span class="comment_author">Replied by @Model.urs.SingleOrDefault(x => x.user_id == replied_by).first_name</span>
+                                                        </div>
+
+                                                    <div class="comment_text_wrap">
+                                                        <div class="comment_text">
+                                                            @Html.Raw(Model.fbsr.SingleOrDefault(x => x.feedback_id == data.id).reply)
+                                                        </div>
+                                                    </div>
+                                                           
+                                                       }
+
+                                                    </div>
+
+                                                
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
+                                <div class="comments_pagination"></div>
+                            </div>
+
+                            <div class="comments_form_wrap">
+                                <h2 class="section_title comments_form_title">Add Feedback</h2>
+                                <div class="comments_form">
+                                    <div id="respond" class="comment-respond">
+                                        <form action="/CodeHub/Feedback" method="post" id="commentform" class="comment-form">
+                                            
+                                            <div class="columns_wrap">
+                                                @*<div class="comments_field comments_author column-1_2">
+                                                        <label for="author" class="required">Name</label>
+                                                        <input id="author" name="user_id" type="text" placeholder="Name *" value="" size="30" aria-required="true" />
+                                                        <input id="author" hidden name="user_id" type="text" placeholder="Name *" value="" size="30" aria-required="true" />
+                                                    </div>
+                                                    <div class="comments_field comments_email column-1_2">
+                                                        <label for="email" class="required">Email</label>
+                                                        <input id="email" name="email" type="text" placeholder="Email *" value="" size="30" aria-required="true" />
+                                                    </div>*@
+
+                                            </div>
+                                        <div class="fv-row mb-7">
+                                            <p class="comments_notes">Please select a course before posting your feedback.*</p>
+                                            <label class="required fw-bolder text-dark fs-6">Select Course</label>
+                                            
+
+                                                <select name="feedbackfor" data-control="select2" data-placeholder="Select a Type" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                                    <option></option>
+                                                    @foreach (var course in Model.crs)
+                                                    {
+                                                    <option> @course.course_name</option>
+                                                    }
+                                                    <option>Website</option>
+                                                </select>
+                                            
+                                        </div>
+    
+                                            <div class="comments_field comments_message">
+                                                <label for="comment" class="required">Your Feedback</label>
+                                                <textarea id="comment" name="feedback" placeholder="Feedback" aria-required="true"></textarea>
+                                            </div>
+                                           
+                                            @if (Session["id"] == null)
+                                            {
+
+                                                <p style="color:red">Please Login to Submit Your Feedback!</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="form-submit">
+                                                    <input name="submit" type="submit" id="send_comment" class="submit" value="Post Feedback" />
+                                                    <input type="hidden" name="comment_post_ID" value="553" id="comment_post_ID" />
+                                                    <input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+                                                </p>
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <!-- /Content -->
+            <!-- Contacts Footer  -->
+            <!-- /Contacts Footer -->
+            <!-- Copyright -->
+            <!-- /Copyright -->
+        </div>
+    </div>
+    <!-- /Body -->
+
+    <a href="#" class="scroll_to_top icon-up-2" title="Scroll to top"></a>
+
+    <div class="custom_html_section"></div>
+
+</body>
+

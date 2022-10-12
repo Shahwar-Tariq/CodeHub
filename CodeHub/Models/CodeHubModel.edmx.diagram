@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e56c93fc8bf4c51b39081186bbdae64" Name="Diagram1">
+        <EntityTypeShape EntityType="code_hubModel.AssignCourse" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.cart" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.cart_item" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.content" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.course" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.favorite_courses" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.feedback" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.feedback_reply" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.order" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.order_details" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.question" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.quiz" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.topic" Width="1.5" PointX="9" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="code_hubModel.user" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="code_hubModel.FK_AssignCourse_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_AssignCourse_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_cart_item_cart" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_cart_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_cart_item_course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_content_course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_content_topic" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_content_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_favorite_courses_courses" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_order_details_course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_quiz_course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_topic_course" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_favorite_courses_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_feedback_reply_feedback" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_feedback_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_order_details_order" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_order_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_question_quiz" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_quiz_topic" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_quiz_user" ManuallyRouted="false" />
+        <AssociationConnector Association="code_hubModel.FK_topic_user" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

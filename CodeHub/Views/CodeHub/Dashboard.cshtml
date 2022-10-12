@@ -1,0 +1,160 @@
+﻿@model  CodeHub.ViewModel.dashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+
+<div class="page_content_wrap">
+    <!-- Course info section -->
+    <div class="content">
+        <article class="post_item post_item_single_courses courses" style="padding-left:0px">
+            <!-- Sidebar -->
+            <div class="sidebar widget_area bg_tint_light sidebar_style_light" style="float:left;width:20%;margin-left:0px;overflow:auto;height:30%;position:static">
+
+                <!-- Categories widget -->
+                <aside class="widget">
+
+                    <h5 class="widget_title" style="font-weight:400">Purchased Courses</h5>
+
+                    <ul style="margin-left:20px;">
+                        @foreach (var data in Model.crs)
+                        {
+                            <li> <a href="/Courses/GetCourse?course_code=@data.course_code" style="font-size:20px;font-weight:600"> @data.course_name </a> </li>
+                        }
+
+                    </ul>
+
+                </aside>
+                <aside class="widget">
+
+                    <h5 class="widget_title" style="font-weight:400">Favorite Courses</h5>
+
+                    <ul style="margin-left:20px;">
+                        @foreach (var data in Model.fav_crs)
+                        {
+
+                            <a href="/CodeHub/RemoveFavorite?id=@data.id">
+                              
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </a>
+                            <a href="/Courses/GetCourse?course_code=@data.course_code" style="font-size:20px;font-weight:600"> @data.course.course_name </a> <br />
+
+                        }
+
+                    </ul>
+
+                </aside>
+                <!-- /Categories widget -->
+
+            </div>
+            <!-- /Sidebar -->
+            <div class="content_wrap" style="float:right;width:70%">
+
+                <section class="post_content">
+                    <!-- Course info section -->
+                    <div class="sc_reviews alignright" style="visibility:hidden">
+                        <div class="reviews_block">
+                            <div id="users_marks" class="sc_tabs_content disp_block">
+                                <div class="reviews_editor">
+                                    <div class="reviews_item reviews_max_level_100" data-max-level="100" data-step="1">
+
+                                    </div>
+                                    <div class="reviews_item reviews_max_level_100" data-max-level="100" data-step="1">
+
+                                    </div>
+                                    <div class="reviews_item reviews_max_level_100" data-max-level="100" data-step="1">
+
+                                    </div>
+                                    <div class="reviews_item reviews_max_level_100" data-max-level="100" data-step="1">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+                            @Html.Raw(@TempData["message"])
+                        </div>
+                    }
+                    <h4>@Session["first_name"].ToString() @Session["last_name"].ToString() 's Dashboard</h4>
+
+                   @* <h2 class="margin_top_2em" style="font-weight:300">@Model.crs.course_name</h2>*@
+                    
+                    @*@if (@Model.crs.type == "Paid")
+                    {
+                        <div style="filter: blur(10px);">
+                            <h2 style="font-weight:300">Content</h2>
+                            <div style="width:60%">
+                                <p>@Html.Raw(@Model.crs.topics.First().contents.FirstOrDefault().content_description)</p>
+                            </div>
+
+                            <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3">
+                                <div class="column-2_3 sc_column_item sc_column_item_1 odd first span_2">
+                                    <div class="sc_lessons">
+
+                                        <div class="course_toc">
+                                            <h2 class="course_toc_title" style="font-weight:300">Examples</h2>
+                                            <div class="display-code" style="background-color:aliceblue">
+                                              
+                                            </div>
+                                            <br />
+                                            <button style="background-color:green" disabled> <a style="color:white" href="/CodeHub/Compiler"> Try It Yourself!! </a></button>
+                                            <button style="background-color:green" disabled> <a style="color:white" href="/Quiz/
+                    "> Attempt Quiz </a></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button_align" style="margin: 0;position: absolute;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%);margin-left:200px; margin-top:150px">
+                            <a href="/Authentication/Login">
+                                <button>View More</button>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <h2 style="font-weight:300">Content</h2>
+                        <div style="width:62%">
+                            <p>@Html.Raw(@Model.crs.topics.First().contents.FirstOrDefault().content_description)</p>
+                        </div>
+
+                        <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3">
+                            <div class="column-2_3 sc_column_item sc_column_item_1 odd first span_2">
+                                <div class="sc_lessons">
+
+                                    <div class="course_toc">
+                                        <h2 class="course_toc_title" style="font-weight:300">Examples</h2>
+                                        <div class="display-code" style="background-color:aliceblue">
+                                         
+                                        </div>
+                                        <br />
+                                        <button style="background-color:green"> <a style="color:white" href="/CodeHub/Compiler"> Try It Yourself!! </a></button>
+                                        <button style="background-color:green"> <a style="color:white" href="/Quiz/AttemptQuiz"> Attempt Quiz </a></button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    }*@
+                </section>
+
+            </div>
+        </article>
+    </div>
+    <!-- /Course info section -->
+    <div class="sc_gap">
+        <!-- Testimonials section -->
+        <!-- /Testimonials section -->
+        <!-- Pricing section -->
+
+    </div>
+</div>

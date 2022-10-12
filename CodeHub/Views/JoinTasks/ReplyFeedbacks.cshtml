@@ -1,0 +1,102 @@
+﻿@model CodeHub.Models.feedback
+@{
+    ViewBag.Title = "ReplyFeedbacks";
+}
+<script src="~/ckeditor_4.17.1_full/ckeditor/ckeditor.js" type="text/javascript"></script>
+
+<div class="toolbar">
+    <!--begin::Toolbar-->
+    <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-5">
+            <!--begin::Title-->
+            <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Feedback</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Feedbacks</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">Reply Feedback</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+        <!--begin::Action group-->
+     
+        <!--end::Action group-->
+    </div>
+    <!--end::Toolbar-->
+</div>
+<div class="flex-center " style="margin-top:45px; padding-left:45px; padding-right:45px" >
+    <div class="mb-10 text-center">
+        <!--begin::Title-->
+        <h1 class="text-dark mb-3">Reply To Feedback</h1>
+
+    </div>
+    @if (TempData["message"] != null)
+    {
+
+        @Html.Raw(@TempData["message"])
+
+    }
+<form action="/JoinTasks/ReplyFeedbacks" enctype="multipart/form-data"  method="post">
+    <!--begin::Body-->
+    <div class="row fv-row mb-7">
+        <div class="col-xl-6" style="align-content:center">
+            <label class="required fw-bolder text-dark fs-6">To:</label>
+            <input type="hidden" name="id" value="@Model.id" class="form-control form-control-solid mb-3 mb-lg-0" />
+            <input type="text" name="send_by" hidden value="@Model.send_by" class="form-control form-control-solid mb-3 mb-lg-0" />
+            <input type="text" name="send_by" disabled value="@Model.user.first_name @Model.user.last_name" class="form-control form-control-solid mb-3 mb-lg-0" />
+
+        </div>
+
+        <div class="col-xl-6" style="align-content:center">
+            <label class="required fw-bolder text-dark fs-6">Feedback:</label>
+            <input type="text" hidden name="feedback_id" value="@Model.id" class="form-control form-control-solid mb-3 mb-lg-0" />
+
+            <input type="text" name="feedback_id" disabled value="@Model.details" class="form-control form-control-solid mb-3 mb-lg-0" />
+
+        </div>
+    </div>
+        <!--begin::To-->
+        <div>
+            <textarea class="editor" name="editor" style="width:700px"></textarea><br />
+        </div>
+        <!--end::Attachments-->
+    <div class="text-center">
+        <!--begin::Submit button-->
+        <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary">
+            <span class="indicator-label">Send Reply</span>
+            <span class="indicator-progress">
+                Please wait...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+        </button>
+        <!--end::Submit button-->
+
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+
+    <!--end::Footer-->
+</form>
+</div>
+<script>CKEDITOR.replace('editor')</script>

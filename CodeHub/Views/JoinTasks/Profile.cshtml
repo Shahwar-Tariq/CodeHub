@@ -1,0 +1,342 @@
+﻿@model CodeHub.Models.user
+@{
+    ViewBag.Title = "Profile";
+    if (Session["role"].ToString() == "Expert")
+    {
+        Layout = "~/Views/Shared/_ExpertLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+}
+
+<head>
+    <title>Good – Bootstrap 5 HTML Admin Dashboard Template by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Good admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
+    <meta name="keywords" content="Good, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, bootstrap dark mode" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Good - Bootstrap 5 HTML Admin Dashboard Template" />
+    <meta property="og:url" content="https://themes.getbootstrap.com/product/good-bootstrap-5-admin-dashboard-template" />
+    <meta property="og:site_name" content="Keenthemes | Good" />
+    <link rel="canonical" href="https://preview.keenthemes.com/good" />
+    <link rel="shortcut icon" href="../assets/media/logos/favicon.ico" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="../assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/jquery/jquery-1.11.3.js"></script>
+    <!--end::Global Stylesheets Bundle-->
+    <!--Begin::Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
+    <!--End::Google Tag Manager -->
+</head>
+<div class="toolbar">
+    <!--begin::Toolbar-->
+    <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-5">
+            <!--begin::Title-->
+            <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Profile</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">My Profile</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+        <!--begin::Action group-->
+    
+        <!--end::Action group-->
+    </div>
+    <!--end::Toolbar-->
+</div>
+@if (TempData["message"] != null)
+{
+
+    @Html.Raw(@TempData["message"])
+
+}
+<div class="flex-md-row-fluid ms-lg-12" style="margin-top:25px">
+    <!--begin::Overview-->
+    <div class="card mb-5 mb-xl-10" id="kt_account_settings_overview" data-kt-scroll-offset="{default: 100, md: 125}">
+        <!--begin::Card header-->
+        <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_overview">
+            <div class="card-title">
+                <h3 class="fw-bolder m-0">My Profile</h3>
+            </div>
+        </div>
+        <!--end::Card header-->
+        <!--begin::Content-->
+        <div id="kt_account_settings_overview" class="collapse show">
+            <!--begin::Card body-->
+            <div class="card-body border-top p-9">
+                <div class="d-flex align-items-start flex-wrap">
+                    <div class="d-flex flex-wrap">
+                        <!--begin::Avatar-->
+                        <div class="symbol symbol-125px mb-7 me-7 position-relative">
+                            <img src="~/Images/profile_images/@Model.image_path" alt="image" />
+                        </div>
+                        <!--end::Avatar-->
+                        <!--begin::Profile-->
+                        <div class="d-flex flex-column">
+                            <div class="fs-2 fw-bolder mb-1">@Model.first_name @Model.last_name</div>
+                            <div class="text-gray-400 text-hover-primary fs-6 fw-bold mb-5">@Model.email</div>
+                            
+                        </div>
+                        <!--end::Profile-->
+                    </div>
+
+                </div>
+                <!--begin::Row-->
+
+                <!--end::Row-->
+                <!--begin::Notice-->
+                <!--end::Notice-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Overview-->
+    <!--begin::Sign-in Method-->
+    <form action="/JoinTasks/Profile" method="post" enctype="multipart/form-data">
+        <div class="card mb-5 mb-xl-10">
+            <!--begin::Card header-->
+            <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
+                <div class="card-title m-0">
+                    <h3 class="fw-bolder m-0">Sign-in Method</h3>
+                </div>
+            </div>
+            <!--end::Card header-->
+            <!--begin::Content-->
+
+            <div id="kt_account_settings_signin_method" class="collapse show">
+                <!--begin::Card body-->
+                <div class="card-body border-top p-9">
+                    <!--begin::Email Address-->
+                    <div class="d-flex flex-wrap align-items-center">
+                        <!--begin::Label-->
+                        <div class="col-xl-6" style="margin-top:20px">
+                            <label class="required fw-bolder text-dark fs-6">Email</label>
+                            <input type="email" name="email" value="@Model.email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Email" />
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Edit-->
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Email Address-->
+                    <!--begin::Separator-->
+                    <div class="separator separator-dashed my-6"></div>
+                    <!--end::Separator-->
+                    <!--begin::Password-->
+                    <div class="d-flex flex-wrap align-items-center mb-10">
+                        <!--begin::Label-->
+                        <div class="col-xl-6" style="margin-top:20px">
+                            <label class="required fw-bolder text-dark fs-6">Password</label>
+                            <input type="text" value="@Model.password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Password" />
+                        </div>
+                        <div class="col-xl-6" style="margin-top:20px">
+                            
+                            <input type="text" id="user_id" hidden value="@Session["id"].ToString()" name="id" class="form-control form-control-solid mb-3 mb-lg-0"  />
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Edit-->
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Password-->
+                    <!--begin::Notice-->
+                    <!--end::Notice-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Sign-in Method-->
+        <!--begin::Basic info-->
+        <div class="card mb-5 mb-xl-10">
+            <!--begin::Card header-->
+            <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                <!--begin::Card title-->
+                <div class="card-title m-0">
+                    <h3 class="fw-bolder m-0">Profile Details</h3>
+                </div>
+                <!--end::Card title-->
+            </div>
+            <!--begin::Card header-->
+            <!--begin::Content-->
+            <div id="kt_account_settings_profile_details" class="collapse show">
+                <!--begin::Form-->
+                <!--begin::Card body-->
+                <div class="card-body border-top p-9">
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">Avatar</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8">
+                            <!--begin::Image input-->
+                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/assets/media/avatars/blank.png)">
+                                <!--begin::Preview existing avatar-->
+                                <input class="image-input-wrapper w-200px h-200px" id="img" accept=".png, .jpg, .jpeg" type="file" name="img" style="background-image: url( ~/Images/profile_images/@Model.image_path)"/>
+                                <!--end::Preview existing avatar-->
+
+                                <!--begin::Remove-->
+                                <span id="remove" class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span>
+                                <!--end::Remove-->
+                            </div>
+                            <!--end::Image input-->
+                            <!--begin::Hint-->
+                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                            <!--end::Hint-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label required fw-bold fs-6">Full Name</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8">
+                            <!--begin::Row-->
+                            <div class="row">
+                                <!--begin::Col-->
+                                <div class="col-lg-6 fv-row">
+                                    <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="@Model.first_name" />
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6 fv-row">
+                                    <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="@Model.last_name" />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label required fw-bold fs-6">Company</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input disabled type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder="Company name" value="Code Hub" />
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                            Skills
+
+                        </label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input type="text" name="skills" class="form-control form-control-lg form-control-solid" placeholder="your skills" value="@Model.skills" />
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-4 col-form-label fw-bold fs-6">Company Site</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-8 fv-row">
+                            <input disabled type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="www.CodeHub.com" />
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <!--begin::Input group-->
+                    <!--begin::Input group-->
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                 
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <!--end::Input group-->
+                </div>
+                <!--end::Card body-->
+                <!--begin::Actions-->
+                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                    
+                    <button type="submit" class="btn btn-primary" id="kt_sign_in_submit">Save Changes</button>
+                </div>
+                <!--end::Actions-->
+                <!--end::Form-->
+            </div>
+            <!--end::Content-->
+        </div>
+        </form>
+        <!--end::Basic info-->
+        <!--begin::Connected Accounts-->
+        <!--end::Connected Accounts-->
+        <!--begin::Notifications-->
+        <!--end::Notifications-->
+        <!--begin::Deactivate Account-->
+        <!--end::Deactivate Account-->
+</div>
+<!--end::Layout-->
+<script>
+    $(document).ready(function(){
+
+        $('#remove').click(function () {
+         var id = $("#user_id").val();
+
+    $.ajax({
+        url: '/JoinTasks/Remove_Profile_Image',
+      type: 'post',
+      data: {id: id},
+      success: function(response){
+        // Changing image source when remove
+        
+          $("#img").attr("src","~/Images/profile_images");
+        
+      }
+    });
+  });
+ });
+</script>
+<!--begin::Modals-->
+<!--begin::Modal - Two-factor authentication-->
+
+<!--end::Modal - Two-factor authentication-->
+
+
+

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CodeHub.Models.user>
+@{
+    ViewBag.Title = "RequestForJoinAsExpert";
+    Layout = "~/Views/Shared/FreeCourseLayout.cshtml";
+}
+          
+            <!-- Page title -->
+            <div class="page_top_wrap page_top_title page_top_breadcrumbs sc_pt_st1">
+                <div class="content_wrap">
+                    <div class="breadcrumbs">
+                        <a class="breadcrumbs_item home" href="/CodeHub/Index">Home</a>
+                        <span class="breadcrumbs_delimiter"></span>
+                        <span class="breadcrumbs_item current">Request To Join as Expert</span>
+                    </div>
+                    <h3 class="page_title">Request To Join as Expert</h3>
+                </div>
+            </div>
+            <!-- /Page title -->
+            <!-- Content without sidebar -->
+            <div class="page_content_wrap">
+                <div class="content">
+                  
+                            <!-- Features section -->
+                     
+                            <!-- /Features section -->
+                            <!-- Contact form -->
+                            <div class="sc_section bg_tint_dark sc_contact_bg_img">
+                                <div class="sc_section_overlay sc_contact_bg_color" data-overlay="0.8" data-bg_color="#024b5e" style="background-color:rgb(1,113,83)">
+                                    <div class="sc_section_content">
+                                        <div class="sc_content content_wrap margin_top_3em_imp margin_bottom_3_5em_imp">
+                                            <div id="sc_contact_form" class="sc_contact_form sc_contact_form_standard aligncenter width_80per">
+                                                <h2 class="sc_contact_form_title">Request to join as expert!!</h2>
+                                                <p class="sc_contact_form_description">Fill in the form details to join as expert</p>
+                                                @if (TempData["message"] != null)
+                                                {
+                                                    <div class="w-lg-600px p-10 p-lg-15 mx-auto">
+                                                        @Html.Raw(@TempData["message"])
+                                                    </div>
+                                                }
+
+                                                <form  method="post" action="/Expert/RequestForJoinAsExpert"  enctype="multipart/form-data">
+                                                    <div class="sc_contact_form_info">
+                                                        <div style="margin-left:30%">
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:100%;">
+                                                                    <label class="required" >Role</label>
+                                                                    <input hidden type="text" name="role" value="Expert">
+                                                                    @*<select name="role" data-control="select2" data-placeholder="Select a role" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                                                        <option></option>
+                                                                        <option>Expert</option>
+                                                                      </select>*@  
+                                                               </div>
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <label class="required" >First Name</label>
+                                                                    <input type="text" name="first_name" placeholder="First Name *" style="height:35px">
+                                                                </div>
+                                                     
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <label class="required">Last Name</label>
+                                                                    <input type="text" name="last_name" placeholder="Last Name *" style="height:35px">
+                                                                </div>
+                                                       
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over"style="width:51%;">
+                                                                    <label class="required" >Email</label>
+                                                                    <input type="email" name="email" placeholder="Email *" style="height:35px">
+                                                                </div>
+
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <label class="required" >Password</label>
+                                                                    <input  type="password" name="password" placeholder="Password *" style="height:35px">
+                                                                </div>
+
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <label class="required">Skills</label>
+                                                                    <input  type="text" name="skills" placeholder="Skills *" style="height:35px">
+                                                                </div>
+                                                                <br />
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <p class="required" style="width:51%;font-size:20px">Upload your CV</p>
+                                                                </div>
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                        <br />
+
+                                                                    <input type="file" name="file"  style="width: 280px;">
+                                                                </div>
+                                                                <div class="sc_contact_form_item sc_contact_form_field label_over" style="width:51%;">
+                                                                    <button type="submit" name="submit" value="submit">
+                                                                        submit
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                
+                                                        </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Contact form -->
+                      
+                </div>
+            </div>
+            <!-- /Content without sidebar -->
+           

@@ -1,0 +1,241 @@
+﻿@model IEnumerable< CodeHub.Models.course>
+@{
+    ViewBag.Title = "AddQuizzes";
+    if (Session["role"].ToString() == "Expert")
+    {
+        Layout = "~/Views/Shared/_ExpertLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <title>Code Hub-Add Quzzies</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Good admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
+    <meta name="keywords" content="Good, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, bootstrap dark mode" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Good - Bootstrap 5 HTML Admin Dashboard Template" />
+    <meta property="og:url" content="https://themes.getbootstrap.com/product/good-bootstrap-5-admin-dashboard-template" />
+    <meta property="og:site_name" content="Keenthemes | Good" />
+
+    <link rel="stylesheet" type="text/css" href="~/bootstrap-4.0.0-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/fontawesome-free-5.15.4-web/fontawesome-free-5.15.4-web/css/v4-shims.min.css" />
+
+
+    <link rel="canonical" href="https://preview.keenthemes.com/good" />
+    <link rel="shortcut icon" href="../../assets/media/logos/favicon.ico" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <!--Begin::Google Tag Manager -->
+   
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
+    <!--End::Google Tag Manager -->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="auth-bg">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Authentication - Sign-up -->
+        <div class="toolbar">
+            <!--begin::Toolbar-->
+            <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+                <!--begin::Page title-->
+                <div class="page-title d-flex flex-column me-5">
+                    <!--begin::Title-->
+                    <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Quiz</h1>
+                    <!--end::Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">
+                            <a href="/Admin/Index" class="text-muted text-hover-primary">Home</a>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-muted">Quizzes</li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <li class="breadcrumb-item text-dark">Add Quiz</li>
+                        <!--end::Item-->
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page title-->
+                <!--begin::Action group-->
+                
+                <!--end::Action group-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <!--begin::Aside-->
+            <!--begin::Aside-->
+            <!--begin::Body-->
+            <div class="d-flex flex-column flex-lg-row-fluid py-10">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid" style="margin-top:15px">
+                    <!--begin::Wrapper-->
+              
+                    <div>
+                        <!--begin::Form-->
+                        <form class="form w-100" action="/JoinTasks/AddQuizzes" novalidate="novalidate" id="kt_sign_up_form" enctype="multipart/form-data" method="post">
+                            <!--begin::Heading-->
+                            <div class="mb-10 text-center">
+                                <!--begin::Title-->
+                                <h1 class="text-dark mb-3">Add Quiz</h1>
+                            
+                            </div>
+                            @if (TempData["message"] != null)
+                            {
+
+                                @Html.Raw(@TempData["message"])
+
+                            }
+                       
+                            <div class="row fv-row mb-7">
+                     
+                                <div class="col-xl-6">
+                                    <label class="required  fw-bolder text-dark fs-6">Course</label>
+                                    <select id ="course" name="course_code" data-control="select2" data-placeholder="Select a Course" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                        <option></option>
+                                        @foreach (var c in Model)
+                                               {
+                                                <option value="@c.course_code">@c.course_name</option>
+                                               }
+                                            </select>
+                                       @*@foreach (SelectListItem c in Model.ListofCourse)
+                                       {
+                                        <option value="@c.Value">@c.Text</option>
+                                       }
+                                    </select>*@
+                                </div>
+
+                                <div class="col-xl-6" style="align-content:center">
+                                    <label class="required fw-bolder text-dark fs-6">Topic Name</label>
+                                    <select id="topics" name="topic_id" data-control="" data-placeholder="Select a Topic" data-hide-search="true" class="form-select form-select-solid fw-bolder">
+                                 
+                                        <option value="0" style="display:none"></option>
+                                    </select>
+                                </div>
+                                </div>
+                            <div class="row fv-row mb-7">
+                      
+                                <div class="col-xl-6">
+                                    <label class="required fw-bolder text-dark fs-6">Quiz No.</label>
+                                    <input type="number" value="0" min="0" name="quiz_no" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Quiz No." />
+                                </div>
+
+                                <div class="col-xl-6" style="align-content:center">
+                                    <label class="required fw-bolder text-dark fs-6">Quiz Name</label>
+
+                                    <input type="text" name="quiz_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Enter Quiz Name" />
+                                </div>
+                            </div>
+                                <!--end::Col-->
+                            <div class="text-center">
+                                <!--begin::Submit button-->
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary">
+                                    <span class="indicator-label">Add Quiz</span>
+                                    <span class="indicator-progress">
+                                        Please wait...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <!--end::Submit button-->
+
+                            </div>
+                      
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+
+                             
+
+                                <!--end::Actions-->
+</form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <!--end::Footer-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Authentication - Sign-up-->
+    </div>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+   
+
+
+    
+    <!--end::Main-->
+    <script>var hostUrl = "/assets/";</script>
+    <!--begin::Javascript-->
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src="/assets/js/custom/authentication/sign-up/general.js"></script>
+    <!--end::Page Custom Javascript-->
+    <!--end::Javascript-->
+    <!--Begin::Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        $(document).ready(function () {
+            console.log("asdf");
+            //jquery selector
+            //idr sy action k pas req jaye gi
+            $("#course").change(function (e) {
+                var id = e.target.value;
+                //yahan action sy  req wapis aye gi
+                $.ajax({
+                    url: "/JoinTasks/GetTopic",
+                    data: { course_code: id },
+                }).done(function (res) {
+                    $("#topics").select2({ minimumResultsForSearch: -1 })
+                    $("#topics").html(res);
+                });
+
+            })
+        });
+
+
+    </script>
+    <!--End::Google Tag Manager (noscript) -->
+</body>
+<!--end::Body-->
+</html>
+
+
+

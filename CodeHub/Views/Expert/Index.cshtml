@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ExpertLayout.cshtml";
+}
+<div class="toolbar">
+    <!--begin::Toolbar-->
+    <div class="container-fluid py-6 py-lg-0 d-flex flex-column flex-sm-row align-items-lg-stretch justify-content-sm-between">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-5">
+            <!--begin::Title-->
+            <h1 class="d-flex flex-column text-dark fw-bolder fs-2 mb-0">Dashbaord</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="index.html" class="text-muted text-hover-primary">Home</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Dashboard</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">Expert</li>
+                <!--end::Breadcrumb-->
+                <!--end::Item-->
+            </ul>
+        </div>
+        <!--end::Page title-->
+        <!--begin::Action group-->
+        <div class="d-flex align-items-center overflow-auto pt-3 pt-sm-0">
+            <!--begin::Action wrapper-->
+            <div class="header-search me-4">
+                <!--begin::Menu- wrapper-->
+                <!--begin::Search-->
+                <div id="kt_header_search" class="d-flex align-items-center" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+                    <!--begin::Form-->
+                    <form data-kt-search-element="form" class="w-100 position-relative" autocomplete="off">
+                        <!--begin::Hidden input(Added to disable form autocomplete)-->
+                        <input type="hidden" />
+                        <!--end::Hidden input-->
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen004.svg-->
+                        <span class="svg-icon svg-icon-3 search-icon position-absolute top-50 translate-middle-y ms-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black" />
+                                <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Input-->
+                        <input type="text" class="form-control bg-transparent ps-12" name="search" value="" placeholder="Search" data-kt-search-element="input" />
+                        <!--end::Input-->
+                        <!--begin::Spinner-->
+                        <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
+                            <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+                        </span>
+                        <!--end::Spinner-->
+                        <!--begin::Reset-->
+                        <span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4" data-kt-search-element="clear">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                            <span class="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <!--end::Reset-->
+                    </form>
+                    <!--end::Form-->
+                    <!--begin::Menu-->
+                    <!--end::Menu-->
+                </div>
+                <!--end::Search-->
+                <!--end::Menu wrapper-->
+            </div>
+            <!--end::Action wrapper-->
+            <!--begin::Actions-->
+            <!--end::Actions-->
+        </div>
+        <!--end::Action group-->
+    </div>
+    <!--end::Toolbar-->
+</div>
+<div class="card-body p-0">
+    <!--begin::Wrapper-->
+    <div class="card-px text-center py-20 my-10">
+        @if (TempData["message"] != null)
+        {
+            <div class="w-lg-600px p-10 p-lg-15 mx-auto" style="width:500px">
+                @Html.Raw(@TempData["message"])
+            </div>
+        }
+        <!--begin::Title-->
+        <h2 class="fs-2x fw-bolder mb-10">Welcome!</h2>
+        <!--end::Title-->
+        <!--begin::Description-->
+        <!--end::Description-->
+        <!--begin::Action-->
+        <!--end::Action-->
+    </div>
+    <!--end::Wrapper-->
+    <!--begin::Illustration-->
+    <div class="text-center px-4">
+        <img class="mw-100 mh-300px" alt="" src="../../assets/media/illustrations/sketchy-1/2.png" />
+    </div>
+    <!--end::Illustration-->
+</div>
+
